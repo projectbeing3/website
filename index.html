@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -12,7 +12,7 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
   <style>
-    * { font-family: 'Inter', sans-serif; }
+    * { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
     .gradient-text{background:linear-gradient(135deg,#fff 0%,#dc2626 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
     .fade-in{opacity:0;transform:translateY(30px);transition:.8s ease}
     .fade-in.visible{opacity:1;transform:translateY(0)}
@@ -22,11 +22,22 @@
     .member-card:hover{transform:scale(1.03);box-shadow:0 10px 20px rgba(220,38,38,.2)}
     img{object-fit:cover}
 
-    /* Songti SC Light for logo */
-    .font-songti {
-      font-family: "Songti SC Light", "Songti SC", serif;
-      font-weight: 300;
-    }
+    /* Songti SC Light for "Being." logo */
+    .font-songti { font-family: "Songti SC Light", "Songti SC", serif; font-weight: 300; }
+
+    /* Lang toggle switch */
+    .lang-toggle { position: relative; display: inline-block; width: 80px; height: 34px; }
+    .lang-toggle input { opacity: 0; width: 0; height: 0; }
+    .slider { position:absolute; inset:0; cursor:pointer; background:#333; transition:.4s; border-radius:34px; }
+    .slider:before { content:""; position:absolute; height:26px; width:26px; left:4px; bottom:4px; background:#fff; transition:.4s; border-radius:50%; }
+    input:checked + .slider { background:#dc2626; }
+    input:checked + .slider:before { transform: translateX(46px); }
+    .slider .lang-text { position:absolute; color:#fff; font-size:10px; font-weight:600; top:50%; transform:translateY(-50%); transition:.4s; }
+    .slider .en { left:8px; } .slider .ja { right:8px; }
+    input:checked + .slider .en { opacity:.5; } input:not(:checked) + .slider .ja { opacity:.5; }
+
+    /* Placeholder block for members when image is not yet added */
+    .ph { background: linear-gradient(135deg,#1f2937,#111827); display:flex; align-items:center; justify-content:center; color:#9ca3af; }
   </style>
 </head>
 
@@ -35,11 +46,17 @@
   <nav class="fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-90 border-b border-gray-800" style="backdrop-filter:blur(8px)">
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
       <div class="text-2xl font-bold logo-glow font-songti">Being.</div>
-      <div class="space-x-6 hidden md:flex">
-        <a href="#home" class="hover:text-red-500">Home</a>
-        <a href="#works" class="hover:text-red-500">Works</a>
-        <a href="#members" class="hover:text-red-500">Members</a>
-        <a href="#contact" class="hover:text-red-500">Contact</a>
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="#home" class="hover:text-red-500"><span data-en="Home" data-ja="ホーム">Home</span></a>
+        <a href="#works" class="hover:text-red-500"><span data-en="Works" data-ja="作品">Works</span></a>
+        <a href="#members" class="hover:text-red-500"><span data-en="Members" data-ja="メンバー">Members</span></a>
+        <a href="#contact" class="hover:text-red-500"><span data-en="Contact" data-ja="お問い合わせ">Contact</span></a>
+
+        <!-- Lang switch (EN default) -->
+        <label class="lang-toggle ml-2">
+          <input type="checkbox" id="langToggle" aria-label="Toggle language (EN/JP)">
+          <span class="slider"><span class="lang-text en">EN</span><span class="lang-text ja">JP</span></span>
+        </label>
       </div>
     </div>
   </nav>
@@ -49,60 +66,62 @@
     <div class="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black"></div>
     <div class="relative z-10 text-center fade-in">
       <h1 class="text-6xl md:text-8xl mb-8 logo-glow font-songti">Being.</h1>
-      <p class="text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed px-6">
+      <p class="text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed px-6"
+         data-en="Capturing raw emotions from our real lives. Short films that resonate worldwide."
+         data-ja="私たちのリアルな生活から生の感情を捉える。世界中に響くショートフィルム。">
         Capturing raw emotions from our real lives. Short films that resonate worldwide.
       </p>
       <div class="mt-12">
-        <a href="#works" class="inline-block bg-red-600 hover:bg-red-700 px-8 py-4 rounded-full text-lg font-semibold transition-all">Explore Our Works</a>
+        <a href="#works" class="inline-block bg-red-600 hover:bg-red-700 px-8 py-4 rounded-full text-lg font-semibold transition-all">
+          <span data-en="Explore Our Works" data-ja="作品を見る">Explore Our Works</span>
+        </a>
       </div>
     </div>
   </section>
 
- <!-- Works -->
-<section id="works" class="min-h-screen py-20 px-6 bg-gray-900">
-  <div class="container mx-auto max-w-6xl text-center">
-    <h2 class="text-5xl font-black mb-12 gradient-text">Our Works</h2>
+  <!-- Works -->
+  <section id="works" class="min-h-screen py-20 px-6 bg-gray-900">
+    <div class="container mx-auto max-w-6xl text-center">
+      <h2 class="text-5xl font-black mb-12 gradient-text" data-en="Our Works" data-ja="作品集">Our Works</h2>
 
-    <!-- グリッド：スマホ=1列, PC=2列 -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-
-      <!-- What Remains Bright -->
-      <div class="work-item bg-black rounded-lg overflow-hidden shadow-xl fade-in">
-        <div class="relative cursor-pointer" onclick="openVideo('x1lYHVUJPwI')">
-          <img src="img/works/what-remains-bright.jpg"
-               alt="What Remains Bright" class="w-full h-[448px] object-cover" loading="lazy"
-               onerror="this.src='https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1280&h=720&fit=crop'">
-          <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-            <i class="fas fa-play text-4xl text-red-500"></i>
+      <!-- Grid: mobile=1col, desktop=2col -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <!-- Life goes on (first) -->
+        <div class="work-item bg-black rounded-lg overflow-hidden shadow-xl fade-in">
+          <div class="relative cursor-pointer" onclick="openVideo('CuBl8eOVhZI')">
+            <img src="img/works/life-goes-on.jpg"
+                 alt="Life goes on" class="w-full h-[448px] object-cover" loading="lazy"
+                 onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1280&h=720&fit=crop'">
+            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+              <i class="fas fa-play text-4xl text-red-500"></i>
+            </div>
+          </div>
+          <div class="p-6 text-left">
+            <h3 class="text-2xl font-bold mb-2">Life goes on</h3>
+            <p class="text-gray-400 mb-2">2025 / January</p>
+            <p class="text-sm text-gray-300">—</p>
           </div>
         </div>
-        <div class="p-6 text-left">
-          <h3 class="text-2xl font-bold mb-2">What Remains Bright</h3>
-          <p class="text-gray-400 mb-2">2025 / April</p>
-          <p class="text-sm text-gray-300">—</p>
-        </div>
-      </div>
 
-       <!-- Life goes on -->
-      <div class="work-item bg-black rounded-lg overflow-hidden shadow-xl fade-in">
-        <div class="relative cursor-pointer" onclick="openVideo('CuBl8eOVhZI')">
-          <img src="img/works/life-goes-on.jpg"
-               alt="Life goes on" class="w-full h-[448px] object-cover" loading="lazy"
-               onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1280&h=720&fit=crop'">
-          <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-            <i class="fas fa-play text-4xl text-red-500"></i>
+        <!-- What Remains Bright (second) -->
+        <div class="work-item bg-black rounded-lg overflow-hidden shadow-xl fade-in">
+          <div class="relative cursor-pointer" onclick="openVideo('x1lYHVUJPwI')">
+            <img src="img/works/what-remains-bright.jpg"
+                 alt="What Remains Bright" class="w-full h-[448px] object-cover" loading="lazy"
+                 onerror="this.src='https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1280&h=720&fit=crop'">
+            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+              <i class="fas fa-play text-4xl text-red-500"></i>
+            </div>
+          </div>
+          <div class="p-6 text-left">
+            <h3 class="text-2xl font-bold mb-2">What Remains Bright</h3>
+            <p class="text-gray-400 mb-2">2025 / April</p>
+            <p class="text-sm text-gray-300">—</p>
           </div>
         </div>
-        <div class="p-6 text-left">
-          <h3 class="text-2xl font-bold mb-2">Life goes on</h3>
-          <p class="text-gray-400 mb-2">2025 / January</p>
-          <p class="text-sm text-gray-300">—</p>
-        </div>
       </div>
-      
-    </div><!-- /grid -->
-  </div>
-</section>
+    </div>
+  </section>
 
   <!-- Video Modal -->
   <div id="videoModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90" style="backdrop-filter:blur(10px)">
@@ -118,39 +137,121 @@
 
   <!-- Members -->
   <section id="members" class="min-h-screen py-20 px-6">
-    <div class="container mx-auto max-w-5xl text-center">
-      <h2 class="text-5xl font-black mb-12 gradient-text">Our Team</h2>
+    <div class="container mx-auto max-w-6xl text-center">
+      <h2 class="text-5xl font-black mb-12 gradient-text" data-en="Our Team" data-ja="チーム">Our Team</h2>
 
-      <!-- Rikuto -->
-      <div class="member-card bg-gray-900 rounded-lg overflow-hidden shadow-xl fade-in max-w-sm mx-auto">
-        <img src="img/members/rikuto1.jpg"
-             alt="Rikuto portrait" class="w-full h-72 object-cover" loading="lazy"
-             onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=800&fit=crop&crop=face'">
-        <div class="p-6 text-center">
-          <h3 class="text-2xl font-bold mb-2">Rikuto</h3>
-          <p class="text-red-500 mb-4">Executive Director / Actor<br>エグゼクティブディレクター / 俳優</p>
-          <div class="flex justify-center space-x-4">
-            <a href="https://instagram.com/luis__r7I" target="_blank" rel="noopener" class="text-2xl hover:text-red-500" aria-label="Instagram">
-              <i class="fab fa-instagram"></i>
-            </a>
+      <!-- Grid: 3 cards (Rikuto + 2 placeholders) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Rikuto -->
+        <div class="member-card bg-gray-900 rounded-lg overflow-hidden shadow-xl fade-in">
+          <div class="relative">
+            <img src="img/members/rikuto.jpg"
+                 alt="Rikuto portrait" class="w-full h-72 object-cover" loading="lazy"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.ph').classList.remove('hidden');">
+            <div class="ph hidden w-full h-72">Rikuto</div>
+          </div>
+          <div class="p-6 text-center">
+            <h3 class="text-2xl font-bold mb-2">Rikuto</h3>
+            <p class="text-red-500 mb-4" data-en="Executive Director / Actor" data-ja="エグゼクティブディレクター / 俳優">
+              Executive Director / Actor
+            </p>
+            <div class="flex justify-center space-x-4">
+              <a href="https://instagram.com/luis__r7I" target="_blank" rel="noopener" class="text-2xl hover:text-red-500" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member #2 (name/role only; photo later) -->
+        <div class="member-card bg-gray-900 rounded-lg overflow-hidden shadow-xl fade-in">
+          <div class="relative">
+            <img src="img/members/member-2.jpg" alt="Member 2" class="w-full h-72 object-cover" loading="lazy"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.ph').classList.remove('hidden');">
+            <div class="ph hidden w-full h-72">Member 2</div>
+          </div>
+          <div class="p-6 text-center">
+            <h3 class="text-2xl font-bold mb-2">Member 2</h3>
+            <p class="text-red-500 mb-4" data-en="Role (EN)" data-ja="役職（日本語）">Role (EN)</p>
+            <!-- SNSは後日追加可 -->
+          </div>
+        </div>
+
+        <!-- Member #3 (name/role only; photo later) -->
+        <div class="member-card bg-gray-900 rounded-lg overflow-hidden shadow-xl fade-in">
+          <div class="relative">
+            <img src="img/members/member-3.jpg" alt="Member 3" class="w-full h-72 object-cover" loading="lazy"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.ph').classList.remove('hidden');">
+            <div class="ph hidden w-full h-72">Member 3</div>
+          </div>
+          <div class="p-6 text-center">
+            <h3 class="text-2xl font-bold mb-2">Member 3</h3>
+            <p class="text-red-500 mb-4" data-en="Role (EN)" data-ja="役職（日本語）">Role (EN)</p>
           </div>
         </div>
       </div>
-
     </div>
   </section>
 
   <!-- Contact -->
   <section id="contact" class="min-h-screen py-20 px-6 bg-gray-900">
-    <div class="container mx-auto max-w-3xl text-center">
-      <h2 class="text-5xl font-black mb-12 gradient-text">Get In Touch</h2>
-      <p class="mb-6">Ready to collaborate? We'd love to hear about your project.</p>
-      <form id="contactForm" class="space-y-4 text-left">
-        <input type="text" name="name" required placeholder="Your Name" class="w-full px-4 py-3 bg-black border border-gray-700 rounded-lg">
-        <input type="email" name="email" required placeholder="Your Email" class="w-full px-4 py-3 bg-black border border-gray-700 rounded-lg">
-        <textarea name="message" rows="6" required placeholder="Tell us about your project..." class="w-full px-4 py-3 bg-black border border-gray-700 rounded-lg resize-none"></textarea>
-        <button type="submit" class="w-full bg-red-600 hover:bg-red-700 py-3 rounded-lg font-semibold">Send Message</button>
-      </form>
+    <div class="container mx-auto max-w-5xl">
+      <div class="text-center mb-12 fade-in">
+        <h2 class="text-5xl font-black mb-6 gradient-text" data-en="Get In Touch" data-ja="お問い合わせ">Get In Touch</h2>
+        <p class="text-xl" data-en="Ready to collaborate? We'd love to hear about your project."
+           data-ja="コラボレーションのご相談をお待ちしています。あなたのプロジェクトについてお聞かせください。">
+          Ready to collaborate? We'd love to hear about your project.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12">
+        <!-- Left column: Contacts & Instagram -->
+        <div class="fade-in">
+          <h3 class="text-2xl font-bold mb-4" data-en="Contacts" data-ja="連絡先">Contacts</h3>
+          <div class="space-y-4 mb-8">
+            <div class="flex items-center space-x-4">
+              <i class="fas fa-envelope text-red-500 text-xl"></i>
+              <span>hello@being-collective.com</span>
+            </div>
+            <div class="flex items-center space-x-4">
+              <i class="fab fa-instagram text-red-500 text-xl"></i>
+              <!-- ▼▼ ここをあなたのアカウントに置き換え（例：being.collective） ▼▼ -->
+              <a id="ig-link" href="https://www.instagram.com/project__being?igsh=b2I2MHJueHoyMXpu" target="_blank" class="underline">
+                @project_being
+              </a>
+            </div>
+          </div>
+
+          <h3 class="text-2xl font-bold mb-4" data-en="Instagram (Latest Posts)" data-ja="Instagram（最新投稿）">Instagram (Latest Posts)</h3>
+          <!-- Instagram自動埋め込み用のプレースホルダ。後日、外部ウィジェットのiframeをここに貼るだけでOK。 -->
+          <div id="ig-embed" class="bg-black border border-gray-700 rounded-lg p-4 text-sm text-gray-400">
+            <p class="mb-2" data-en="Paste your Instagram feed widget iframe here later."
+               data-ja="後日、Instagramフィードのウィジェットiframeをここに貼り付けてください。">
+              Paste your Instagram feed widget iframe here later.
+            </p>
+            <!-- 例）外部サービスの埋め込みコード（SnapWidget/LightWidget等）をここへ -->
+            <!-- <iframe src="https://snapwidget.com/embed/xxxx" class="w-full" style="height: 400px;" allowtransparency="true" frameborder="0" scrolling="no"></iframe> -->
+          </div>
+        </div>
+
+        <!-- Right column: Contact form (demo) -->
+        <div class="fade-in">
+          <form id="contactForm" class="space-y-4 text-left">
+            <input type="text" name="name" required
+                   class="w-full px-4 py-3 bg-black border border-gray-700 rounded-lg focus:border-red-500 focus:outline-none"
+                   placeholder="" data-placeholder-en="Your Name" data-placeholder-ja="お名前">
+            <input type="email" name="email" required
+                   class="w-full px-4 py-3 bg-black border border-gray-700 rounded-lg focus:border-red-500 focus:outline-none"
+                   placeholder="" data-placeholder-en="Your Email" data-placeholder-ja="メールアドレス">
+            <textarea name="message" rows="6" required
+                      class="w-full px-4 py-3 bg-black border border-gray-700 rounded-lg focus:border-red-500 focus:outline-none resize-none"
+                      placeholder="" data-placeholder-en="Tell us about your project..." data-placeholder-ja="プロジェクトについて教えてください..."></textarea>
+            <button type="submit" class="w-full bg-red-600 hover:bg-red-700 py-3 rounded-lg font-semibold">
+              <span data-en="Send Message" data-ja="メッセージを送信">Send Message</span>
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -161,8 +262,28 @@
   </footer>
 
   <script>
-    // Fade-in
-    const observer = new IntersectionObserver((entries)=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.1});
+    // Language Toggle (EN default)
+    const langToggle = document.getElementById('langToggle');
+    let isJapanese = false;
+    function applyLang(){
+      document.querySelectorAll('[data-en],[data-ja]').forEach(el=>{
+        el.textContent = isJapanese ? (el.getAttribute('data-ja') || el.getAttribute('data-en')) : el.getAttribute('data-en');
+      });
+      document.querySelectorAll('[data-placeholder-en],[data-placeholder-ja]').forEach(el=>{
+        el.placeholder = isJapanese ? (el.getAttribute('data-placeholder-ja') || el.getAttribute('data-placeholder-en')) : el.getAttribute('data-placeholder-en');
+      });
+    }
+    if(langToggle){
+      langToggle.addEventListener('change', function(){
+        isJapanese = this.checked;
+        document.documentElement.setAttribute('data-lang', isJapanese ? 'ja' : 'en');
+        applyLang();
+      });
+    }
+    applyLang(); // initialize
+
+    // Fade-in on scroll
+    const observer = new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.1});
     document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
 
     // Video Modal
@@ -170,8 +291,13 @@
     function closeVideo(){const m=document.getElementById('videoModal'),p=document.getElementById('videoPlayer');p.src='';m.classList.add('hidden');document.body.style.overflow='auto'}
     document.getElementById('videoModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeVideo()});
 
-    // Contact (demo)
-    document.getElementById('contactForm').addEventListener('submit',e=>{e.preventDefault();alert('Message sent successfully!');e.target.reset()});
+    // Contact form (demo only)
+    document.getElementById('contactForm').addEventListener('submit',e=>{
+      e.preventDefault();
+      const msg = isJapanese ? 'メッセージが送信されました。ありがとうございます！' : 'Message sent successfully! Thank you for reaching out.';
+      alert(msg);
+      e.target.reset(); applyLang();
+    });
   </script>
 </body>
 </html>
