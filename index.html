@@ -21,6 +21,12 @@
     .work-item:hover{transform:translateY(-5px);box-shadow:0 10px 20px rgba(220,38,38,.2)}
     .member-card:hover{transform:scale(1.03);box-shadow:0 10px 20px rgba(220,38,38,.2)}
     img{object-fit:cover}
+
+    /* Songti SC Light for logo */
+    .font-songti {
+      font-family: "Songti SC Light", "Songti SC", serif;
+      font-weight: 300;
+    }
   </style>
 </head>
 
@@ -28,7 +34,7 @@
   <!-- Nav -->
   <nav class="fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-90 border-b border-gray-800" style="backdrop-filter:blur(8px)">
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-      <div class="text-2xl font-bold logo-glow">Being.</div>
+      <div class="text-2xl font-bold logo-glow font-songti">Being.</div>
       <div class="space-x-6 hidden md:flex">
         <a href="#home" class="hover:text-red-500">Home</a>
         <a href="#works" class="hover:text-red-500">Works</a>
@@ -42,7 +48,7 @@
   <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black"></div>
     <div class="relative z-10 text-center fade-in">
-      <h1 class="text-6xl md:text-8xl font-black mb-8 logo-glow">Being.</h1>
+      <h1 class="text-6xl md:text-8xl mb-8 logo-glow font-songti">Being.</h1>
       <p class="text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed px-6">
         Capturing raw emotions from our real lives. Short films that resonate worldwide.
       </p>
@@ -57,33 +63,29 @@
     <div class="container mx-auto max-w-5xl text-center">
       <h2 class="text-5xl font-black mb-12 gradient-text">Our Works</h2>
 
-
       <!-- Life goes on -->
-<div class="work-item bg-black rounded-lg overflow-hidden shadow-xl fade-in max-w-md mx-auto">
-  <div class="relative cursor-pointer" onclick="openVideo('CuBl8eOVhZI')">
-    <!-- サムネイル画像（準備できる場合は img/works/life-goes-on.jpg をアップロード） -->
-    <img src="img/works/life-goes-on.jpg"
-         alt="Life goes on"
-         class="w-full h-[448px] object-cover" loading="lazy"
-         onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1280&h=720&fit=crop'">
-    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-      <i class="fas fa-play text-4xl text-red-500"></i>
-    </div>
-  </div>
-  <div class="p-6 text-left">
-    <h3 class="text-2xl font-bold mb-2">Life goes on</h3>
-    <p class="text-gray-400 mb-2">2025 / January</p>
-    <p class="text-sm text-gray-300">—</p>
-  </div>
-</div>
+      <div class="work-item bg-black rounded-lg overflow-hidden shadow-xl fade-in max-w-md mx-auto mb-12">
+        <div class="relative cursor-pointer" onclick="openVideo('CuBl8eOVhZI')">
+          <img src="img/works/life-goes-on.jpg"
+               alt="Life goes on" class="w-full h-[448px] object-cover" loading="lazy"
+               onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1280&h=720&fit=crop'">
+          <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+            <i class="fas fa-play text-4xl text-red-500"></i>
+          </div>
+        </div>
+        <div class="p-6 text-left">
+          <h3 class="text-2xl font-bold mb-2">Life goes on</h3>
+          <p class="text-gray-400 mb-2">2025 / January</p>
+          <p class="text-sm text-gray-300">—</p>
+        </div>
+      </div>
 
       <!-- What Remains Bright -->
       <div class="work-item bg-black rounded-lg overflow-hidden shadow-xl fade-in max-w-md mx-auto">
         <div class="relative cursor-pointer" onclick="openVideo('x1lYHVUJPwI')">
-          <!-- 作品サムネ（無ければ後で追加OK） -->
           <img src="img/works/what-remains-bright.jpg"
-               alt="What Remains Bright" class="w-full h-56 md:h-[448px] object-cover" loading="lazy"
-               onerror="this.src='https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop'">
+               alt="What Remains Bright" class="w-full h-[448px] object-cover" loading="lazy"
+               onerror="this.src='https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1280&h=720&fit=crop'">
           <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
             <i class="fas fa-play text-4xl text-red-500"></i>
           </div>
@@ -116,7 +118,7 @@
 
       <!-- Rikuto -->
       <div class="member-card bg-gray-900 rounded-lg overflow-hidden shadow-xl fade-in max-w-sm mx-auto">
-        <img src="img/members/rikuto1.jpg"
+        <img src="img/members/rikuto.jpg"
              alt="Rikuto portrait" class="w-full h-72 object-cover" loading="lazy"
              onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=800&fit=crop&crop=face'">
         <div class="p-6 text-center">
@@ -149,7 +151,7 @@
 
   <!-- Footer -->
   <footer class="py-8 px-6 border-t border-gray-800 text-center">
-    <div class="text-2xl font-bold logo-glow mb-2">Being.</div>
+    <div class="text-2xl font-bold logo-glow font-songti mb-2">Being.</div>
     <p class="text-gray-400">© 2025 Being. Collective. All rights reserved.</p>
   </footer>
 
